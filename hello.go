@@ -193,7 +193,7 @@ func main() {
 	
 	ip, err := GetOutBoundIP()
 	if err != nil {
-		log.Print(fmt.Sprintf("GET LOCALIP failed:%s", port)))
+		log.Print(fmt.Sprintf("GET LOCALIP failed:%s", port))
 	}
 	log.Print(fmt.Sprintf("LOCALIP is :%s",ip))
 	
