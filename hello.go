@@ -95,6 +95,18 @@ func getEventsHandler() *cloudeventsClient.EventReceiver {
 	return h
 }
 
+func GetOutBoundIP() (ip string, err error) {
+	conn, err := net.Dial("udp", "8.8.8.8:53")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	localAddr := conn.LocalAddr().(*net.UDPAddr)
+	fmt.Println(localAddr.String())
+	ip = strings.Split(localAddr.String(), ":")[0]
+	return
+}
+
 func main() {
 	tmpl := template.Must(template.ParseFiles("index.html"))
 
@@ -178,5 +190,14 @@ func main() {
 	}
 
 	log.Print("Hello from Cloud Run! The container started successfully and is listening for HTTP requests on $PORT")
+	
+	ip, err := GetOutBoundIP()
+	if err != nil {
+		log.Print(err)
+	}
+	log.Print(ip)
+	
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
+
+
