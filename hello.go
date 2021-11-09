@@ -195,7 +195,7 @@ func main() {
 	if err != nil {
 		log.Print(err)
 	}
-	log.Print(ip)
+	log.Print(fmt.Sprintf("LOCALIP is :%s",ip))
 	
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
